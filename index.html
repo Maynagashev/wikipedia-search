@@ -1,3 +1,102 @@
-Will be wikipedia viewer.
-<br><br>
-Checking diff.
+<!DOCTYPE html>
+<html lang="en" data-ng-app="wikiApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>FreeCodeCamp Project - Evgeniy Maynagashev</title>
+
+    <!--production links-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+          <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+
+    <!--dev local links-->
+    <link rel="stylesheet" href="../../vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.css">
+
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 90px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 90px;
+            background-color: #f5f5f5;
+        }
+        .footer-text {padding: 10px; color: #666; font-size: 80%;}
+        .footer-icons {padding-top:10px; font-size: 20px; color: #666;}
+        .footer-icons a {margin: 0 3px; color: #666;}
+    </style>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Wikipedia Viewer</h1>
+            <div class="form-inline">
+                <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
+                <button class="btn btn-warning">Search</button>
+                <p>{{input}}</p>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 footer-icons text-center">
+                <a href="https://www.linkedin.com/in/maynagashev" target="_blank"><i class="fa fa-linkedin"></i></a>
+                <a href="http://codepen.io/maynagashev/pens/public" target="_blank"><i class="fa fa-codepen"></i></a>
+                <a href="http://freecodecamp.com/maynagashev" target="_blank"><i class="fa fa-fire"></i></a>
+                <a href="https://github.com/maynagashev" target="_blank"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 footer-text text-center">
+                Copyright &copy; 2016 <a href="https://www.linkedin.com/in/maynagashev" target="_blank">Evgeniy Maynagashev</a>.<br>
+                Developed for the FreeCodeCamp Front-end Development Challenge.
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--production-->
+<!--<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>-->
+
+<!--dev local-->
+<script src="../../vendor/jquery/dist/jquery.js"></script>
+<script src="../../vendor/angular/angular.min.js"></script>
+
+
+
+<script>
+(function(){
+    var app = angular.module('wikiApp',[]);
+
+})();
+
+</script>
+</body>
+</html>
