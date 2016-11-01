@@ -1,13 +1,16 @@
 # Wikipedia Viewer
+
 Wikipedia Viewer is an application that allows the user to search for articles on Wikipedia that match certain keywords.
+
 Project for FreeCodeCamp's [Front-End Web Development Certification](https://www.freecodecamp.com/about)
 
 ## Objective
+
 Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/wGqEga/.
 
 ## Rules
-Rule #1: Don't look at the example project's code. Figure it out for yourself.
-Rule #2: Fulfill the below user stories. Use whichever libraries or APIs you need. Give it your own personal style.
+- Rule \#1: Don't look at the example project's code. Figure it out for yourself.
+- Rule \#2: Fulfill the below user stories. Use whichever libraries or APIs you need. Give it your own personal style.
 
 ## User stories
 - User Story: I can search Wikipedia entries in a search box and see the resulting Wikipedia entries.
