@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Wikipedia Viewer</h1>
-            <div class="form-inline">
+            <div name="searchForm" class="form-inline" ng-controller="wiki-api">
                 <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
                 <button class="btn btn-warning">Search</button>
                 <p>{{input}}</p>
