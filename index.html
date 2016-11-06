@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="wiki-app">
+<html lang="en" data-ng-app="wikiSearch">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,12 +34,34 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-7 col-sm-offset-3" ng-controller="wiki-api">
-            <div class="input-group">
-            <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
-            <span class="input-group-btn"><button class="btn btn-warning" ng-click="query=query+' click!';">Search</button></span>
-            </div>
-            <p>{{input}}</p>
+        <div class="col-xs-12 col-sm-7 col-sm-offset-3" ng-controller="MainController as c">
+            <form>
+                <div class="input-group"  style="margin-bottom: 30px;">
+                    <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
+                    <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()">Search</input></span>
+                </div>
+                <ul class="list-unstyled">
+                    <li ng-repeat="r in results">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="https://en.wikipedia.org/wiki/{{r.title}}"><img src="" alt="" width="100" height="100" media-object"></a>
+                            </div>
+
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <a href="https://en.wikipedia.org/wiki/{{r.title}}">{{r.title}}</a>
+                                </div>
+                                <p>{{r.snippet}}</p>
+                                <p>{{r.timestamp | date}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div ng-show="resultsFetched && results.length <= 0">
+                    <h3>Nothing found.</h3>
+                </div>
+            </form>
         </div>
     </div>
 </div>
