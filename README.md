@@ -29,3 +29,4 @@ Build a CodePen.io app that is functionally similar to this: https://codepen.io/
 - HTML5 & CSS3
 - JavaScript
 - Wikipedia API
+- AngularJS
