@@ -58,9 +58,11 @@
                     </li>
                 </ul>
 
-                <div ng-show="resultsFetched && results.length <= 0">
-                    <h3>Nothing found.</h3>
-                </div>
+                <ul class="list-unstyled">
+                    <li ng-repeat="m in errm track by $index">
+                        {{m}}
+                    </li>
+                </ul>
             </form>
         </div>
     </div>

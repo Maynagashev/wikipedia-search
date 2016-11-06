@@ -9,6 +9,8 @@
         });
 
     app.controller('MainController', ['$http', '$scope', function ($http, $scope){
+
+        $scope.errm = [];
         $scope.resultsFetched = false;
         $scope.query = '';
         $scope.results = [
@@ -35,15 +37,26 @@
                     });
             }
             else {
+                $scope.errm.push('Empty query.');
                 console.log('empty query');
             }
         };
 
         function showResults(d) {
+            var len = d.query.search.length;
             $scope.results = d.query.search;
-            $scope.resultsFetched = true;
-            console.log(this.results);
+            if (len>0) {
+                $scope.errm.push("Returned: " + len + " results.");
+            }
+            else {
+                $scope.errm.push("Nothing found.");
+            }
+            //this.updateErrm();
+            console.log($scope.errm);
+        }
 
+        this.updateErrm = function () {
+            console.log("method invoked!");
         }
 
         /*
