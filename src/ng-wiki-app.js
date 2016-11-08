@@ -33,26 +33,24 @@
                     .success(function mycb(data) {
                         console.log(data);
                         showResults(data);
-
                     });
             }
             else {
                 $scope.errm.push('Empty query.');
-                console.log('empty query');
             }
         };
 
         function showResults(d) {
-            var len = d.query.search.length;
+            $scope.errm = [];
             $scope.results = d.query.search;
+
+            var len = d.query.search.length;
             if (len>0) {
                 $scope.errm.push("Returned: " + len + " results.");
             }
             else {
                 $scope.errm.push("Nothing found.");
             }
-            //this.updateErrm();
-            console.log($scope.errm);
         }
 
         this.updateErrm = function () {
