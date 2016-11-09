@@ -1,6 +1,6 @@
-# Wikipedia Viewer
+![Wikipedia Search Logo](http://maina.ru/p/wikipedia-viewer/src/i/wiki-search.png "Wikipedia Search Logo")
 
-Wikipedia Viewer is an application that allows the user to search for articles on Wikipedia that match certain keywords.
+Wikipedia Search is an application that allows the user to search for articles on Wikipedia that match certain keywords.
 
 Project for FreeCodeCamp's [Front-End Web Development Certification](https://www.freecodecamp.com/about)
 
@@ -30,3 +30,4 @@ Build a CodePen.io app that is functionally similar to this: https://codepen.io/
 - JavaScript
 - Wikipedia API
 - AngularJS
+
