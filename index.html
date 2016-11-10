@@ -36,17 +36,18 @@
     <div class="row" style="padding-top: 30px;">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2" ng-controller="MainController as c">
             <div class="row" style="margin-bottom: 30px;">
-                <div class="col-xs-12 col-sm-3 text-right">
-                    <a class="btn btn-warning" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Wikipedia entry</a>
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                    <form>
-                        <div class="input-group">
-                            <input type="text" name="search query" ng-model="query" placeholder="Or enter search query" class="form-control">
-                            <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search"></input></span>
-                        </div>
-                    </form>
-                </div>
+
+                <form name="searchForm">
+                    <div class="input-group">
+                        <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
+                        <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search"></input></span>
+                    </div>
+                    <div class="small text-right" style="padding: 8px 5px;">
+                        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">OR pick a random
+                            Wikipedia entry &rarr;</a>
+                    </div>
+                </form>
+
 
             </div>
 
