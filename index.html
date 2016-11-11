@@ -39,8 +39,8 @@
 
                 <form name="searchForm">
                     <div class="input-group">
-                        <input type="text" name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
-                        <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search"></input></span>
+                        <input type="text" required name="search query" ng-model="query" ng-model-options="{ debounce: 500 }" placeholder="Enter search query" class="form-control">
+                        <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search" ng-disabled="searchForm.$invalid"></input></span>
                     </div>
                     <div class="small text-right" style="padding: 8px 5px;">
                         <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">OR pick a random
