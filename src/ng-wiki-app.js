@@ -7,10 +7,7 @@ window.log = function() { return console.log.apply(console, arguments); };
 
 (function () {
 
-    var app = angular.module('wikiSearch', [])
-        .run(function(){
-            console.log("It's works.");
-        });
+    var app = angular.module('wikiSearch', []).run(function(){ console.log("It's works."); });
 
     angular.module('wikiSearch').controller('MainController', ['wiki', '$scope', function (wiki, $scope){
 
