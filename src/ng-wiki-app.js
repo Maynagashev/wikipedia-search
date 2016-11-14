@@ -26,12 +26,7 @@
 
         function showResults(results) {
 
-
-
-
-            $scope.pagination = pagination(results, 10, 1);
-            console.log($scope.pagination);
-
+            $scope.pagination = pagination(results, 3, 1);
 
             $scope.errm = [];
             var len = results.length;
@@ -43,28 +38,33 @@
             }
         }
 
-        /**
-         *
-         * @param perPage
-         * @param curPage
-         */
+
         function pagination(items, perPage, curPage) {
 
-            var start = 0,
-                finish = 10;
+            var pagesCount = Math.floor((items.length%perPage===0) ? items.length/perPage : items.length/perPage+1);
+            curPage = (Number.isInteger(curPage) && curPage>=1 && curPage<=pagesCount) ? curPage : 1;
 
-            return {
+            var r = {
+                curPage : curPage,
+                start : curPage*perPage-perPage,
+                finish : curPage*perPage-1,
                 length : items.length,
                 perPage : perPage,
-                curPage : curPage,
-                list : items,
-                sliced_list : items.slice(start,finish)
+                pagesCount : pagesCount,
+                items : items,
+                list : [],
+                pages : []
             };
+
+            r.list = r.items.slice(r.start,r.finish+1);
+            for(var i=0; i<pagesCount; i++) { r.pages[i] = i+1; }
+
+            console.log(r);
+            return r;
         }
 
-        // future issue
-        this.updateErrm = function () {
-            console.log("method invoked!");
+        this.showPage = function (page) {
+            $scope.pagination = pagination($scope.pagination.items, 3, page);
         };
 
     }]);
