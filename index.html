@@ -56,24 +56,30 @@
             <ul class="list-unstyled" style="margin-bottom: 20px;">
                 <li ng-repeat="m in errm track by $index">{{m}}</li>
             </ul>
+
             <ul class="list-unstyled">
                 <li ng-repeat="r in pagination.list">
                     <div class="media">
                         <div class="media-left">
-                            <a href="https://en.wikipedia.org/wiki/{{r.title}}"><img src="" alt="" width="100" height="100" media-object"></a>
+                            <a href="https://en.wikipedia.org/wiki/{{r.title}}">
+                                <img src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" alt="" width="80" class="media-object">
+                            </a>
                         </div>
 
                         <div class="media-body">
                             <div class="media-heading">
                                 <a href="https://en.wikipedia.org/wiki/{{r.title}}">{{r.title}}</a>
                             </div>
-                            <p>{{r.snippet}}</p>
-                            <p>{{r.timestamp | date}}</p>
+                            <p>{{r.terms.description[0]}}</p>
                         </div>
                     </div>
                 </li>
             </ul>
-            <button ng-repeat="p in pagination.pages" ng-click="c.showPage(p)">{{p}}</button>
+            <div class="pagination">
+                <label><span>Pages:</span>
+                <button ng-repeat="p in pagination.pages" ng-click="c.showPage(p)" class="btn btn-warning" style="margin-right: 10px;">{{p}}</button>
+                </label>
+            </div>
 
 
 
@@ -103,7 +109,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-<script src="src/ng-wiki-app.js"></script>
+<script src="src/app.js"></script>
 <script src="src/services.js"></script>
 </body>
 </html>

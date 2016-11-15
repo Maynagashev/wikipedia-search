@@ -12,11 +12,14 @@
         $scope.resultsFetched = false;
         $scope.query = '';
         $scope.results = [];
+        $scope.perPage = 10;
 
+        //default search
+        wiki.fetch('emma').then(function success(d) { showResults(d); });
 
         this.sendRequest = function () {
             if ($scope.query) {
-                wiki.fetch($scope.query).then(function success(d) { showResults(d.data.query.search); });
+                wiki.fetch($scope.query).then(function success(d) { showResults(d); });
             }
             else {
                 $scope.errm.push('Empty query.');
@@ -24,9 +27,19 @@
         }
 
 
-        function showResults(results) {
+        function showResults(d) {
+            console.log(d);
+            var results = [];
+            if (d.data.hasOwnProperty('query')) {
+                for (var k in d.data.query.pages) {
+                    if (k.match(/\d+/)) {
+                        results.push(d.data.query.pages[k]);
+                    }
+                }
+            }
 
-            $scope.pagination = pagination(results, 3, 1);
+
+            $scope.pagination = pagination(results, $scope.perPage, 1);
 
             $scope.errm = [];
             var len = results.length;
@@ -64,7 +77,7 @@
         }
 
         this.showPage = function (page) {
-            $scope.pagination = pagination($scope.pagination.items, 3, page);
+            $scope.pagination = pagination($scope.pagination.items, $scope.perPage, page);
         };
 
     }]);

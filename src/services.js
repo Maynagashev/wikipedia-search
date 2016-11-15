@@ -3,7 +3,22 @@
 angular.module('wikiSearch').service('wiki', function ($http) {
 
     var method = 'JSONP';
-    var url = 'https://en.wikipedia.org//w/api.php?action=query&format=json&list=search&utf8=1&callback=JSON_CALLBACK&srsearch=';
+    var limit = 500;
+    var p = [
+        "format=json",
+        "generator=prefixsearch",
+        "prop=pageprops%7Cpageimages%7Cpageterms",
+        "ppprop=displaytitle",
+        "piprop=thumbnail",
+        "pithumbsize=80",
+        "pilimit="+limit,
+        "wbptterms=description",
+        "gpsnamespace=0",
+        "gpslimit="+limit
+    ];
+
+    var url = 'https://en.wikipedia.org//w/api.php?action=query&'+p.join('&')+'&callback=JSON_CALLBACK&gpssearch=';
+    console.log(url);
 
     this.status = null;
     this.response = null;
@@ -25,6 +40,30 @@ angular.module('wikiSearch').service('wiki', function ($http) {
 
 
     /*
+     fulltext search
+     var url = 'https://en.wikipedia.org//w/api.php?action=query&format=json&list=search&utf8=1&callback=JSON_CALLBACK&srsearch=';
+
+
+    prefixes url:
+
+     https://en.wikipedia.org/w/api.php?action=query&format=json&generator=prefixsearch&prop=pageprops%7Cpageimages%7Cpageterms&redirects=&ppprop=displaytitle&piprop=thumbnail&pithumbsize=80&pilimit=6&wbptterms=description&gpssearch=emma&gpsnamespace=0&gpslimit=6&callback=callbackStack.queue%5B9%5D
+
+     api.php?
+     action=query&
+     format=json&
+     generator=prefixsearch&
+     prop=pageprops%7Cpageimages%7Cpageterms&
+     redirects=&
+     ppprop=displaytitle&
+     piprop=thumbnail&
+     pithumbsize=80&
+     pilimit=6&
+     wbptterms=description&
+     gpssearch=emma&
+     gpsnamespace=0&
+     gpslimit=6&
+     callback=callbackStack.queue%5B9%5D
+
      {
      "ns": 0,
      "title": "Albert Einstein",

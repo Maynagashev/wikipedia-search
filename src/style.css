@@ -8,6 +8,16 @@ body {
     background-color: #111856;
     color: #fff;
 }
+
+.media {
+    margin-bottom: 10px;
+}
+.pagination {
+    margin-top:30px;
+}
+.pagination span {
+    margin-right:20px;
+}
 .footer {
     position: absolute;
     bottom: 0;
@@ -30,3 +40,4 @@ body {
 .fade.ng-enter.ng-enter-active {
     opacity:1;
 }
+
