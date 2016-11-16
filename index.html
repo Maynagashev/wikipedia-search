@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../../vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.css">
 
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="src/style.css">
 
 
@@ -40,7 +41,7 @@
                 <form name="searchForm">
                     <div class="input-group">
                         <!-- ng-model-options="{ debounce: 500 }"  -->
-                        <input type="text" required name="search query" ng-model="query" placeholder="Enter search query" class="form-control">
+                        <input type="text" required name="search query" ng-model="query" placeholder="Enter search query" class="form-control" id="search-input">
                         <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search"></input></span>
                     </div>
                     <div class="small text-right" style="padding: 8px 5px;">
@@ -62,7 +63,7 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="https://en.wikipedia.org/wiki/{{r.title}}">
-                                <img src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" alt="" width="80" class="media-object">
+                                <img ng-src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" alt="" width="80" class="media-object">
                             </a>
                         </div>
 
@@ -106,7 +107,8 @@
     </div>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
 <script src="src/app.js"></script>

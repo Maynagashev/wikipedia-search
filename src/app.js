@@ -2,6 +2,25 @@
  * Created by https://github.com/maynagashev
  */
 
+$("#search-input").autocomplete({
+    source: function(request, response) {
+        $.ajax({
+            url: "http://en.wikipedia.org/w/api.php",
+            dataType: "jsonp",
+            data: {
+                'action': "opensearch",
+                'format': "json",
+                'search': request.term
+            },
+            success: function(data) {
+                response(data[1]);
+            }
+        });
+    }
+});
+
+
+
 (function () {
 
     var app = angular.module('wikiSearch', []).run(function(){ console.log("Angular loaded."); });
