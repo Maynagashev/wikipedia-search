@@ -2,52 +2,68 @@
 
 angular.module('wikiSearch').service('wiki', function ($http) {
 
-    var method = 'JSONP';
     var limit = 500;
-    var prefix = [
-        "format=json",
-        "generator=prefixsearch",
-        "prop=pageprops%7Cpageimages%7Cpageterms",
-        "ppprop=displaytitle",
-        "piprop=thumbnail",
-        "pithumbsize=80",
-        "pilimit="+limit,
-        "wbptterms=description",
-        "gpsnamespace=0",
-        "gpslimit="+limit,
-        "gpssearch="
-    ];
+    var qs = {
+        prefix: [
+            "format=json",
+            "generator=prefixsearch",
+            "prop=pageprops%7Cpageimages%7Cpageterms",
+            "ppprop=displaytitle",
+            "piprop=thumbnail",
+            "pithumbsize=80",
+            "pilimit=" + limit,
+            "wbptterms=description",
+            "gpsnamespace=0",
+            "gpslimit=" + limit,
+            "gpssearch="
+        ],
 
-    var fulltext = [
-        "format=json",
-        "list=search",
-        "utf8=1",
-        "srsearch="
-    ];
+        fulltext: [
+            "format=json",
+            "list=search",
+            "utf8=1",
+            "srlimit=50",
+            "srsearch="
+        ]
+    };
 
-    //selector
-    var q = fulltext;
-    var url = 'https://en.wikipedia.org//w/api.php?action=query&callback=JSON_CALLBACK&'+q.join('&');
-    console.log(url);
+    var currentQuery = 'fulltext';
+
+
+
 
     this.status = null;
     this.response = null;
 
     this.fetch = function(q) {
-
-        return $http({method: method, url: url+q});
-        /*
-            .then(
-            function(response) {
-                this.status = response.status;
-                this.data = response.data;
-            },
-            function(response) {
-                this.status = response.status;
-                this.data = response.data || "Request failed";
-            });*/
+        var url = 'https://en.wikipedia.org//w/api.php?action=query&callback=JSON_CALLBACK&'+qs[currentQuery].join('&')+q;
+        console.log(url);
+        return $http({
+            method: 'jsonp',
+            url: url
+        });
     };
 
+    this.parse = function (d) {
+        console.log(d);
+        var results = [];
+        switch (currentQuery) {
+            case 'fulltext':
+                    results = d.data.query.search;
+                break;
+            case 'prefix':
+                if (d.data.hasOwnProperty('query')) {
+                    for (var k in d.data.query.pages) {
+                        if (k.match(/\d+/)) {
+                            results.push(d.data.query.pages[k]);
+                        }
+                    }
+                }
+                break;
+        }
+
+        return results;
+    }
 
     /*
      fulltext search

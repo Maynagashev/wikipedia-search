@@ -2,30 +2,13 @@
  * Created by https://github.com/maynagashev
  */
 
-$("#search-input").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "http://en.wikipedia.org/w/api.php",
-            dataType: "jsonp",
-            data: {
-                'action': "opensearch",
-                'format': "json",
-                'search': request.term
-            },
-            success: function(data) {
-                response(data[1]);
-            }
-        });
-    }
-});
-
 
 
 (function () {
-
-    var app = angular.module('wikiSearch', []).run(function(){ console.log("Angular loaded."); });
-
-    angular.module('wikiSearch').controller('MainController', ['wiki', '$scope', function (wiki, $scope){
+    'use strict';
+    angular
+        .module('wikiSearch', ['ngMaterial', 'ngMessages'])
+        .controller('MainController', function (wiki, $scope, $compile){
 
         $scope.errm = [];
         $scope.resultsFetched = false;
@@ -34,11 +17,12 @@ $("#search-input").autocomplete({
         $scope.perPage = 10;
 
         //default search
-        wiki.fetch('emma').then(function success(d) { showResults(d); });
+        wiki.fetch('emma').then(function success(d) { var ar = wiki.parse(d); showResults(ar); });
 
-        this.sendRequest = function () {
+        // submit
+        this.submit = function () {
             if ($scope.query) {
-                wiki.fetch($scope.query).then(function success(d) { showResults(d); });
+                wiki.fetch($scope.query).then(function success(d) {  var ar = wiki.parse(d); showResults(ar); });
             }
             else {
                 $scope.errm.push('Empty query.');
@@ -46,17 +30,7 @@ $("#search-input").autocomplete({
         }
 
 
-        function showResults(d) {
-            console.log(d);
-            var results = [];
-            if (d.data.hasOwnProperty('query')) {
-                for (var k in d.data.query.pages) {
-                    if (k.match(/\d+/)) {
-                        results.push(d.data.query.pages[k]);
-                    }
-                }
-            }
-
+        function showResults(results) {
 
             $scope.pagination = pagination(results, $scope.perPage, 1);
 
@@ -99,7 +73,28 @@ $("#search-input").autocomplete({
             $scope.pagination = pagination($scope.pagination.items, $scope.perPage, page);
         };
 
-    }]);
+
+/*
+        $("#search-input").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "http://en.wikipedia.org/w/api.php",
+                    dataType: "jsonp",
+                    data: {
+                        'action': "opensearch",
+                        'format': "json",
+                        'search': request.term
+                    },
+                    success: function(data) {
+                        response(data[1]);
+
+                    }
+                });
+            }
+        });*/
+
+
+    });
 })();
 
 

@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="../../vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../../vendor/font-awesome/css/font-awesome.css">
 
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">-->
     <link rel="stylesheet" href="src/style.css">
 
 
@@ -35,21 +38,53 @@
         </div>
     </div>
     <div class="row" style="padding-top: 30px;">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2" ng-controller="MainController as c">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2" ng-controller="MainController as ctrl">
             <div class="row" style="margin-bottom: 30px;">
+                <md-content class="md-padding">
+                    <form name="searchForm" ng-submit="ctrl.submit()">
+                        <md-autocomplete
+                                ng-disabled="ctrl.isDisabled"
+                                md-no-cache="ctrl.noCache"
+                                md-selected-item="ctrl.selectedItem"
+                                md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                                md-search-text="ctrl.searchText"
+                                md-selected-item-change="ctrl.selectedItemChange(item)"
+                                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                                md-item-text="item.display"
+                                md-min-length="0"
+                                placeholder="What do you want to know about?">
+                            <md-item-template>
+                                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                No states matching "{{ctrl.searchText}}" were found.
+                                <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+                            </md-not-found>
+                        </md-autocomplete>
+                        <br>
+                        <md-checkbox ng-model="ctrl.simulateQuery">Simulate query for results?</md-checkbox>
+                        <md-checkbox ng-model="ctrl.noCache">Disable caching of queries?</md-checkbox>
+                        <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
 
-                <form name="searchForm">
-                    <div class="input-group">
-                        <!-- ng-model-options="{ debounce: 500 }"  -->
-                        <input type="text" required name="search query" ng-model="query" placeholder="Enter search query" class="form-control" id="search-input">
-                        <span class="input-group-btn"><input type="submit" class="btn btn-warning" ng-click="c.sendRequest()" value="Search"></input></span>
-                    </div>
-                    <div class="small text-right" style="padding: 8px 5px;">
-                        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">OR pick a random
-                            Wikipedia entry &rarr;</a>
-                    </div>
-                </form>
+<!--
+                        {{query}}
+                        <div class="input-group">
+                            <input type="text" required
+                                   name="search query"
+                                   ng-model="query"
+                                   ng-model-options="{ updateOn: 'default blur' }"
+                                   placeholder="Enter search query"
+                                   class="form-control"
+                                   id="search-input">
+                            <span class="input-group-btn"><input type="submit" class="btn btn-warning"value="Search"></input></span>
+                        </div>
 
+                        <div class="small text-right" style="padding: 8px 5px;">
+                            <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">OR pick a random
+                                Wikipedia entry &rarr;</a>
+                        </div>-->
+                    </form>
+                </md-content>
 
             </div>
 
@@ -87,7 +122,7 @@
         </div>
     </div>
 </div>
-<footer class="footer">
+<!--<footer class="footer">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 footer-icons text-center">
@@ -105,12 +140,21 @@
             </div>
         </div>
     </div>
-</footer>
+</footer>-->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
 <script src="src/app.js"></script>
 <script src="src/services.js"></script>
 </body>
