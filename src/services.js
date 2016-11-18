@@ -4,7 +4,7 @@ angular.module('wikiSearch').service('wiki', function ($http) {
 
     var method = 'JSONP';
     var limit = 500;
-    var p = [
+    var prefix = [
         "format=json",
         "generator=prefixsearch",
         "prop=pageprops%7Cpageimages%7Cpageterms",
@@ -14,10 +14,20 @@ angular.module('wikiSearch').service('wiki', function ($http) {
         "pilimit="+limit,
         "wbptterms=description",
         "gpsnamespace=0",
-        "gpslimit="+limit
+        "gpslimit="+limit,
+        "gpssearch="
     ];
 
-    var url = 'https://en.wikipedia.org//w/api.php?action=query&'+p.join('&')+'&callback=JSON_CALLBACK&gpssearch=';
+    var fulltext = [
+        "format=json",
+        "list=search",
+        "utf8=1",
+        "srsearch="
+    ];
+
+    //selector
+    var q = fulltext;
+    var url = 'https://en.wikipedia.org//w/api.php?action=query&callback=JSON_CALLBACK&'+q.join('&');
     console.log(url);
 
     this.status = null;
