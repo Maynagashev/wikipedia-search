@@ -43,6 +43,19 @@
                 <md-content class="md-padding">
                     <form name="searchForm" ng-submit="ctrl.submit()">
                         <md-autocomplete
+                                md-search-text="query"
+                                md-selected-item="selectedItem"
+                                md-items="item in autoCompSearch(query)"
+                                md-item-text="item.display">
+                            <span md-highlight-text="query">{{item.display}}</span>
+                            <md-item-template>
+                                <span md-highlight-text="query" md-highlight-flags="^i">{{item.display}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <!--
+                        md-search-text-change="getMatches(searchText)"
+                                md-delay="500"
+                        <md-autocomplete
                                 ng-disabled="ctrl.isDisabled"
                                 md-no-cache="ctrl.noCache"
                                 md-selected-item="ctrl.selectedItem"
@@ -56,16 +69,12 @@
                             <md-item-template>
                                 <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
                             </md-item-template>
-                            <md-not-found>
-                                No states matching "{{ctrl.searchText}}" were found.
-                                <!--<a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>-->
-                            </md-not-found>
                         </md-autocomplete>
                         <br>
                         <md-checkbox ng-model="ctrl.simulateQuery">Simulate query for results?</md-checkbox>
                         <md-checkbox ng-model="ctrl.noCache">Disable caching of queries?</md-checkbox>
                         <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
-
+-->
 <!--
                         {{query}}
                         <div class="input-group">
