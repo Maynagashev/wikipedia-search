@@ -16,22 +16,7 @@
         var self = this;
 
         $scope.searchText = '';
-
-        $scope.autoCompSearch = function(text) {
-            var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=opensearch&format=json&search="+text;
-            return $http.jsonp(url).then(function (response) {
-                $log.info(response);
-                return response.data[1].map(function (d) {
-                    return {
-                        value: d,
-                        display: d
-                    };
-                });
-            });
-        };
- 
-
-
+        $scope.autocomplete = wiki.autocomplete;
 
 
         $scope.errm = [];
@@ -39,15 +24,6 @@
 
         $scope.results = [];
         $scope.perPage = 10;
-
-
-
-
-
-
-
-
-
 
         //default search
         wiki.fetch('emma').then(function success(d) { var ar = wiki.parse(d); showResults(ar); });
@@ -64,7 +40,6 @@
 
 
         function showResults(results) {
-
             $scope.pagination = pagination(results, $scope.perPage, 1);
 
             $scope.errm = [];
@@ -105,27 +80,6 @@
         this.showPage = function (page) {
             $scope.pagination = pagination($scope.pagination.items, $scope.perPage, page);
         };
-
-
-/*
-        $("#search-input").autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: "http://en.wikipedia.org/w/api.php",
-                    dataType: "jsonp",
-                    data: {
-                        'action': "opensearch",
-                        'format': "json",
-                        'search': request.term
-                    },
-                    success: function(data) {
-                        response(data[1]);
-
-                    }
-                });
-            }
-        });*/
-
 
     }
 })();

@@ -1,6 +1,6 @@
 
 
-angular.module('wikiSearch').service('wiki', function ($http) {
+angular.module('wikiSearch').service('wiki', function ($http, $log) {
 
     var limit = 500;
     var qs = {
@@ -65,6 +65,18 @@ angular.module('wikiSearch').service('wiki', function ($http) {
         return results;
     }
 
+    this.autocomplete = function(text) {
+        var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=opensearch&format=json&search="+text;
+        return $http.jsonp(url).then(function (response) {
+            $log.info(response);
+            return response.data[1].map(function (d) {
+                return {
+                    value: d,
+                    display: d
+                };
+            });
+        });
+    };
     /*
      fulltext search
      var url = 'https://en.wikipedia.org//w/api.php?action=query&format=json&list=search&utf8=1&callback=JSON_CALLBACK&srsearch=';
