@@ -11,7 +11,7 @@
         .controller('MainController', MainController);
 
 
-    function MainController (wiki, $scope, $compile, $timeout, $q, $log, $http) {
+    function MainController (wiki, $scope) {
 
         var self = this;
 
@@ -23,7 +23,7 @@
         $scope.resultsFetched = false;
 
         $scope.results = [];
-        $scope.perPage = 10;
+        $scope.perPage = 5;
 
         //default search
         wiki.fetch('emma').then(function success(d) { var ar = wiki.parse(d); showResults(ar); });
@@ -54,7 +54,7 @@
 
 
         function pagination(items, perPage, curPage) {
-
+            
             var pagesCount = Math.floor((items.length%perPage===0) ? items.length/perPage : items.length/perPage+1);
             curPage = (Number.isInteger(curPage) && curPage>=1 && curPage<=pagesCount) ? curPage : 1;
 

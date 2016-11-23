@@ -9,7 +9,7 @@
 
     <!--production links-->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
-          <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
 
     <!--dev local links-->
@@ -42,96 +42,51 @@
             <div class="row" style="margin-bottom: 30px;">
                 <md-content class="md-padding">
                     <form name="searchForm" ng-submit="ctrl.submit()">
-                        <md-autocomplete
-                                md-search-text="query"
-                                md-selected-item="selectedItem"
-                                md-items="item in autocomplete(query)"
-                                md-item-text="item.display">
-                            <span md-highlight-text="query">{{item.display}}</span>
-                            <md-item-template>
-                                <span md-highlight-text="query" md-highlight-flags="^i">{{item.display}}</span>
-                            </md-item-template>
-                        </md-autocomplete>
-                        <!--
-                        md-search-text-change="getMatches(searchText)"
-                                md-delay="500"
-                        <md-autocomplete
-                                ng-disabled="ctrl.isDisabled"
-                                md-no-cache="ctrl.noCache"
-                                md-selected-item="ctrl.selectedItem"
-                                md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-                                md-search-text="ctrl.searchText"
-                                md-selected-item-change="ctrl.selectedItemChange(item)"
-                                md-items="item in ctrl.querySearch(ctrl.searchText)"
-                                md-item-text="item.display"
-                                md-min-length="0"
-                                placeholder="What do you want to know about?">
-                            <md-item-template>
-                                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-                            </md-item-template>
-                        </md-autocomplete>
-                        <br>
-                        <md-checkbox ng-model="ctrl.simulateQuery">Simulate query for results?</md-checkbox>
-                        <md-checkbox ng-model="ctrl.noCache">Disable caching of queries?</md-checkbox>
-                        <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
--->
-<!--
-                        {{query}}
-                        <div class="input-group">
-                            <input type="text" required
-                                   name="search query"
-                                   ng-model="query"
-                                   ng-model-options="{ updateOn: 'default blur' }"
-                                   placeholder="Enter search query"
-                                   class="form-control"
-                                   id="search-input">
-                            <span class="input-group-btn"><input type="submit" class="btn btn-warning"value="Search"></input></span>
-                        </div>
-
-                        <div class="small text-right" style="padding: 8px 5px;">
-                            <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">OR pick a random
-                                Wikipedia entry &rarr;</a>
-                        </div>-->
+                        <section layout="row" layout-sm="column" layout-align="center center">
+                            <md-autocomplete
+                                    layout-fill
+                                    md-search-text="query"
+                                    md-selected-item="selectedItem"
+                                    md-items="item in autocomplete(query)"
+                                    md-item-text="item.display">
+                                <span md-highlight-text="query">{{item.display}}</span>
+                                <md-item-template>
+                                    <span md-highlight-text="query" md-highlight-flags="^i">{{item.display}}</span>
+                                </md-item-template>
+                            </md-autocomplete>
+                            <md-button class="md-raised md-primary" type="submit">Search</md-button>
+                            <md-button class="md-raised " ng-href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random</md-button>
+                        </section>
                     </form>
                 </md-content>
-
             </div>
-
 
             <ul class="list-unstyled" style="margin-bottom: 20px;">
                 <li ng-repeat="m in errm track by $index">{{m}}</li>
             </ul>
 
-            <ul class="list-unstyled">
-                <li ng-repeat="r in pagination.list">
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="https://en.wikipedia.org/wiki/{{r.title}}">
-                                <img ng-src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" alt="" width="80" class="media-object">
-                            </a>
-                        </div>
-
-                        <div class="media-body">
-                            <div class="media-heading">
-                                <a href="https://en.wikipedia.org/wiki/{{r.title}}">{{r.title}}</a>
-                            </div>
+            <md-content>
+                <md-list flex>
+                    <md-list-item class="md-3-line" ng-repeat="r in pagination.list"  ng-href="https://en.wikipedia.org/wiki/{{r.title}}" target="_blank">
+                        <a href="https://en.wikipedia.org/wiki/{{r.title}}">
+                            <img ng-src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" class="md-avatar" alt="{{item.who}}" />
+                        </a>
+                        <div class="md-list-item-text" layout="column">
+                            <h3><a href="https://en.wikipedia.org/wiki/{{r.title}}">{{r.title}}</a></h3>
                             <p>{{r.terms.description[0]}}</p>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </md-list-item>
+                </md-list>
+            </md-content>
             <div class="pagination">
                 <label><span>Pages:</span>
-                <button ng-repeat="p in pagination.pages" ng-click="c.showPage(p)" class="btn btn-warning" style="margin-right: 10px;">{{p}}</button>
+                    <button ng-repeat="p in pagination.pages" ng-click="ctrl.showPage(p)" class="btn btn-warning" style="margin-right: 10px;">{{p}}</button>
                 </label>
             </div>
-
-
-
         </div>
     </div>
 </div>
-<!--<footer class="footer">
+<footer class="footer">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1 footer-icons text-center">
@@ -149,7 +104,7 @@
             </div>
         </div>
     </div>
-</footer>-->
+</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
