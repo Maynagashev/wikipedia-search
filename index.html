@@ -31,13 +31,15 @@
     <![endif]-->
 </head>
 <body>
-<div class="container">
+<header class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 logo-box">
             <a href="index.html"><img src="src/i/wiki-search.png" alt="Wikipedia Search Logo" width="500" class="center-block img-responsive"></a>
         </div>
     </div>
-    <div class="row" style="padding-top: 30px;">
+</header>
+<div class="container site-content">
+    <div class="row" style="padding-top: 30px;" ng-cloak>
         <div class="col-xs-12 col-sm-8 col-sm-offset-2" ng-controller="MainController as ctrl">
             <div class="row" style="margin-bottom: 30px;">
                 <md-content class="md-padding">
@@ -48,7 +50,8 @@
                                     md-search-text="query"
                                     md-selected-item="selectedItem"
                                     md-items="item in autocomplete(query)"
-                                    md-item-text="item.display">
+                                    md-item-text="item.display"
+                                    placeholder="Search Wikipedia">
                                 <span md-highlight-text="query">{{item.display}}</span>
                                 <md-item-template>
                                     <span md-highlight-text="query" md-highlight-flags="^i">{{item.display}}</span>
@@ -65,22 +68,20 @@
                 <li ng-repeat="m in errm track by $index">{{m}}</li>
             </ul>
 
-            <md-content>
-                <md-list flex>
-                    <md-list-item class="md-3-line" ng-repeat="r in pagination.list"  ng-href="https://en.wikipedia.org/wiki/{{r.title}}" target="_blank">
-                        <a href="https://en.wikipedia.org/wiki/{{r.title}}">
-                            <img ng-src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}" class="md-avatar" alt="{{item.who}}" />
-                        </a>
-                        <div class="md-list-item-text" layout="column">
-                            <h3><a href="https://en.wikipedia.org/wiki/{{r.title}}">{{r.title}}</a></h3>
-                            <p>{{r.terms.description[0]}}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-            <div class="pagination">
+
+            <div ng-repeat="r in pagination.list" class="item">
+               <!--<img class="md-avatar" alt="{{item.who}}"
+                     ng-src="{{(r.thumbnail.source) ? r.thumbnail.source : 'https://www.wikipedia.org/portal/wikipedia.org/assets/img/noimage.png'}}"/>-->
+                <div>
+                    <h3><a href="https://en.wikipedia.org/wiki/{{r.title}}" target="_blank">{{r.title}}</a></h3>
+                    <div ng-bind-html="r.snippet"></div>
+                </div>
+            </div>
+
+
+            <div ng-if="pagination.pagesCount>1" style="margin-top:30px;">
                 <label><span>Pages:</span>
-                    <button ng-repeat="p in pagination.pages" ng-click="ctrl.showPage(p)" class="btn btn-warning" style="margin-right: 10px;">{{p}}</button>
+                    <md-button ng-class="['md-raised', {'md-warn': p==1, 'md-primary': p>1}]" ng-repeat="p in pagination.pages" ng-click="ctrl.showPage(p)" class="page" id="page{{p}}">{{p}}</md-button>
                 </label>
             </div>
         </div>
@@ -111,6 +112,7 @@
 
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>

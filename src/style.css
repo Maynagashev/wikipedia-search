@@ -1,13 +1,23 @@
 html {
-    position: relative;
-
+    background-color: #111856;
 }
 body {
     background-color: #111856;
     color: #fff;
-    height: auto;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+.site-content {
+    flex: 1;
+}
+h3 a, a:hover { color: white; }
+h3 a:visited { color: antiquewhite; }
 
+.searchmatch {
+    background-color: #172297;
+}
+.item {margin-bottom: 30px;}
 .media {
     margin-bottom: 10px;
 }
@@ -18,12 +28,13 @@ body {
     margin-right:20px;
 }
 .footer {
+    margin-top: 50px;
     width: 100%;
-
 }
 .footer-text {padding: 10px; color: #ddd; font-size: 80%;}
 .footer-icons {padding-top:10px; font-size: 20px; color: #ddd;}
 .footer-icons a {margin: 0 3px; color: #ddd;}
+
 
 
 /* The starting CSS styles for the enter animation */

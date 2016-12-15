@@ -7,27 +7,22 @@
 (function () {
     'use strict';
     angular
-        .module('wikiSearch', ['ngMaterial', 'ngMessages'])
+        .module('wikiSearch', ['ngMaterial', 'ngMessages', 'ngSanitize'])
         .controller('MainController', MainController)
         .service('wiki', WikiService);
 
 
     function MainController (wiki, $scope) {
 
-        var self = this;
-
         $scope.searchText = '';
         $scope.autocomplete = wiki.autocomplete;
-
-
         $scope.errm = [];
         $scope.resultsFetched = false;
-
         $scope.results = [];
-        $scope.perPage = 5;
+        $scope.perPage = 10;
 
         //default search
-        wiki.fetch('emma').then(function success(d) { var ar = wiki.parse(d); showResults(ar); });
+        //wiki.fetch('test').then(function success(d) { var ar = wiki.parse(d); showResults(ar); });
 
         // submit
         this.submit = function () {
@@ -80,11 +75,11 @@
 
         this.showPage = function (page) {
             $scope.pagination = pagination($scope.pagination.items, $scope.perPage, page);
+            $('.page').removeClass('md-warn').addClass('md-primary');
+            $('#page'+page).removeClass('md-primary').addClass('md-warn');
         };
 
     }
-
-
 
     function WikiService($http, $log) {
 
@@ -114,9 +109,6 @@
         };
 
         var currentQuery = 'fulltext';
-
-
-
 
         this.status = null;
         this.response = null;
