@@ -144,7 +144,7 @@
         }
 
         this.autocomplete = function(text) {
-            var url = "http://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=opensearch&format=json&search="+text;
+            var url = "https://en.wikipedia.org/w/api.php?callback=JSON_CALLBACK&action=opensearch&format=json&search="+text;
             return $http.jsonp(url).then(function (response) {
                 $log.info(response);
                 return response.data[1].map(function (d) {
